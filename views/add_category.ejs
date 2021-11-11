@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+
+    <style>
+
+
+.cat {
+            font-family: 'Azeret Mono', monospace;
+            font-family: 'Zen Antique Soft', serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        .cat td, .cat th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        .cat tr:nth-child(even){background-color: #f2f2f2;}
+        
+        .cat tr:hover {background-color: #ddd;}
+        
+        .cat th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+        
+        div {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+
+        
+        a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+        </style>
+
+</head>
+<body>
+        <!--Header-->
+        <header id="header">
+                        <H1 style="text-align: center;">Category Master</H1>
+              
+        </header>
+        <!--/Header-->
+        <!--main-->
+        <main id="id">
+                        <a href="/"><i class="fas fa-arrow-alt-circle-left"></i> Back</a>
+                
+            <div>
+                    <h2 class="text-dark">Add New Category</h2>
+                
+
+                <!--Form starts here-->
+                <form action="add-category" method="POST">
+                            <label for="name" class="text-light">Category Name :</label>
+                            <input type="hidden" name="id" value="">
+                            <input type="text" name="name" value="" placeholder="Ex. Mobile, Laptop">
+                    
+                            <button type="submit" class="btn text-dark update">Add product</button>  
+
+                    <div style="padding: 10px;"></div>
+                    <table class="cat">
+                        <thead>
+                           
+                            <th>CatID</th>
+                            <th>Category Name</th>
+                            <th>Update/Delete</th>
+                        </thead>
+                        <tbody>
+                            <% data.forEach(entry => {%>
+                            <tr>
+                                <td><%= entry.catID%></td>
+                                <td><%= entry.catName%></td>
+                                <td colspan="2">
+                                    <a href="/update-cat/<%= entry.catID%>" class="btn border-shadow update" style="background-color:rgb(6, 77, 77);">Update</a>
+                                    <a href="/deleteCat/<%= entry.catID%>" class="btn border-shadow delete">delete</a>    
+                                </td>
+                                
+                            </tr>
+                            <%})%>
+                        </tbody>
+                    </table>
+
+                </form>
+            </div>
+        </main>
+    <!--/main-->
+
+
+</body>
+</html>

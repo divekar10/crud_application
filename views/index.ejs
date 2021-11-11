@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJS Application</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+    <style>
+        .Product {
+            font-family: 'Azeret Mono', monospace;
+            font-family: 'Zen Antique Soft', serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        .Product td, .Product th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        .Product tr:nth-child(even){background-color: #f2f2f2;}
+        
+        .Product tr:hover {background-color: #ddd;}
+        
+        .Product th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+
+        a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+
+        </style>
+      
+</head>
+<body>
+
+    <header id="header" style="display: block; text-align: center;">
+                   <h1 style="font-family: 'Zen Antique Soft', serif;">Product Details</h1>
+    </header>
+
+
+    <a href="add-product" style="background-color: #50e7b0;">Add Product</a>
+
+    <table class="Product">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Category Name</th>
+                <th>Category ID</th>
+                <th colspan="2">Edit / Delete</th>
+            </tr>
+        </thead>
+   
+        <tbody>
+                <%data.forEach(entry => { %>
+
+              
+
+            <tr>
+                <td><%=entry.productID %></td>
+                <td><%=entry.productName %></td>
+                <td><%=entry.catName %></td>
+                <td><%=entry.catID %></td> 
+                <td>
+                    <a href="/update-product/<%= entry.productID%>" class="btn border-shadow update" style="background-color:rgb(6, 77, 77);">Update</a>
+                    <a href="/delete/<%= entry.productID%>" class="btn border-shadow delete">delete</a>
+
+                    <!-- <button class="btn-update" data-id=<%=entry.productID %> href="update-product">Edit</button>
+                    <button class="btn-delete" data-id=<%=entry.productID %>>Delete</button> -->
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+   
+    </table>
+
+    <div class="break"></div>
+    <div class="pagination">
+            <% if(page > 1){ %> <a style="background-color: white; color: #03492f;" href="/?page=<%=page - 1%>">&laquo Previous</a> <% } %>
+    <% for(let i = iterator; i <= endingLink; i++) { %>
+            <% if(i=== page) { %>
+            <a style="background-color: white; color: #03492f;" href="/?page=<%=i%>"><%=i%></a>
+            <% continue; %>       
+    <%}%>
+            <a style="background-color: white; color: #03492f;" href="/?page=<%=i%>"><%=i%></a>
+            <% } %>
+            <% if(page < numOfPages){ %> <a style="background-color: white; color: #03492f;" href="/?page=<%=page + 1%>">Next &raquo</a> <% } %>
+    </div>
+
+</body>
+</html>
